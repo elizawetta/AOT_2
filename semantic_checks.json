@@ -1,0 +1,210 @@
+[
+  {
+    "case": "empty",
+    "text": "",
+    "field": "drug",
+    "expected": [],
+    "result": {
+      "drug": [],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [],
+      "evidence": []
+    },
+    "passed": true,
+    "attempts": []
+  },
+  {
+    "case": "no_drug",
+    "text": "С утра беспокоит головная боль.",
+    "field": "drug",
+    "expected": [],
+    "result": {
+      "drug": [],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [],
+      "evidence": []
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[],\"evidence\":[]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "case": "multiple",
+    "text": "Сначала принимала Нурофен, затем Парацетамол.",
+    "field": "drug",
+    "expected": [
+      "Нурофен",
+      "Парацетамол"
+    ],
+    "result": {
+      "drug": [
+        "Нурофен",
+        "Парацетамол"
+      ],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [],
+      "evidence": [
+        "Сначала принимала Нурофен, затем Парацетамол."
+      ]
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[\"Нурофен\",\"Парацетамол\"],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[],\"evidence\":[\"Сначала принимала Нурофен, затем Парацетамол.\"]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "case": "negation",
+    "text": "Нурофен не помог.",
+    "field": "positive_effect",
+    "expected": [],
+    "result": {
+      "drug": [
+        "Нурофен"
+      ],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [],
+      "evidence": [
+        "Нурофен не помог."
+      ]
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[\"Нурофен\"],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[],\"evidence\":[\"Нурофен не помог.\"]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "case": "hypothesis",
+    "text": "Надеюсь, Нурофен поможет.",
+    "field": "positive_effect",
+    "expected": [],
+    "result": {
+      "drug": [
+        "Нурофен"
+      ],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [],
+      "evidence": []
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[\"Нурофен\"],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[],\"evidence\":[\"Надеюсь, что Нурофен поможет.\"]}",
+        "valid": false,
+        "error": "Evidence is absent from source text: ['Надеюсь, что Нурофен поможет.']"
+      },
+      {
+        "number": 2,
+        "raw_response": "{\"drug\":[\"Нурофен\"],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[],\"evidence\":[]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "case": "other_person",
+    "text": "После Супрастина у сестры появилась сонливость.",
+    "field": "adverse_reaction",
+    "expected": [
+      "сонливость"
+    ],
+    "result": {
+      "drug": [
+        "Супрастин"
+      ],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [
+        "появилась сонливость"
+      ],
+      "evidence": [
+        "После Супрастина у сестры появилась сонливость."
+      ]
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[\"Супрастин\"],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[\"появилась сонливость\"],\"evidence\":[\"После Супрастина у сестры появилась сонливость.\"]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "case": "quotation",
+    "text": "В инструкции написано: «может вызвать сонливость», но у меня её не было.",
+    "field": "adverse_reaction",
+    "expected": [],
+    "result": {
+      "drug": [],
+      "indication": [],
+      "positive_effect": [],
+      "adverse_reaction": [],
+      "evidence": [
+        "может вызвать сонливость",
+        "но у меня её не было."
+      ]
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[],\"indication\":[],\"positive_effect\":[],\"adverse_reaction\":[],\"evidence\":[\"может вызвать сонливость\",\"но у меня её не было.\"]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "case": "typo",
+    "text": "Мне помог Нурафен.",
+    "field": "drug",
+    "expected": [
+      "Нурафен"
+    ],
+    "result": {
+      "drug": [
+        "Нурафен"
+      ],
+      "indication": [],
+      "positive_effect": [
+        "улучшения заметила"
+      ],
+      "adverse_reaction": [],
+      "evidence": [
+        "Мне помог Нурафен."
+      ]
+    },
+    "passed": true,
+    "attempts": [
+      {
+        "number": 1,
+        "raw_response": "{\"drug\":[\"Нурафен\"],\"indication\":[],\"positive_effect\":[\"улучшения заметила\"],\"adverse_reaction\":[],\"evidence\":[\"Мне помог Нурафен.\"]}",
+        "valid": true,
+        "error": null
+      }
+    ]
+  }
+]

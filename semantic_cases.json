@@ -1,0 +1,57 @@
+[
+  {
+    "case": "empty",
+    "text": "",
+    "field": "drug",
+    "expected": []
+  },
+  {
+    "case": "no_drug",
+    "text": "С утра беспокоит головная боль.",
+    "field": "drug",
+    "expected": []
+  },
+  {
+    "case": "multiple",
+    "text": "Сначала принимала Нурофен, затем Парацетамол.",
+    "field": "drug",
+    "expected": [
+      "Нурофен",
+      "Парацетамол"
+    ]
+  },
+  {
+    "case": "negation",
+    "text": "Нурофен не помог.",
+    "field": "positive_effect",
+    "expected": []
+  },
+  {
+    "case": "hypothesis",
+    "text": "Надеюсь, Нурофен поможет.",
+    "field": "positive_effect",
+    "expected": []
+  },
+  {
+    "case": "other_person",
+    "text": "После Супрастина у сестры появилась сонливость.",
+    "field": "adverse_reaction",
+    "expected": [
+      "сонливость"
+    ]
+  },
+  {
+    "case": "quotation",
+    "text": "В инструкции написано: «может вызвать сонливость», но у меня её не было.",
+    "field": "adverse_reaction",
+    "expected": []
+  },
+  {
+    "case": "typo",
+    "text": "Мне помог Нурафен.",
+    "field": "drug",
+    "expected": [
+      "Нурафен"
+    ]
+  }
+]

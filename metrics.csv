@@ -1,0 +1,3 @@
+﻿version,tp,fp,fn,json_valid,schema_valid_first,accepted,retries,recovered,unsupported_values_first,unsupported_values_final,unsupported_evidence_first,unsupported_evidence_final,precision,recall,f1
+version_1,9,8,383,6,6,6,0,0,7,7,2,2,0.5294,0.023,0.044
+version_2,44,38,348,48,45,29,27,6,50,25,27,0,0.5366,0.1122,0.1857
